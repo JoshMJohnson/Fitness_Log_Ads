@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:WorkoutLog.Model"
+             xmlns:cells="clr-namespace:WorkoutLog.Cells"
+             x:Class="Fitness_Log.CustomControls.CalendarView"
+             x:Name="this"
+             Spacing="10">
+
+    <Grid ColumnDefinitions="*, 150, *"
+          RowDefinitions="*">
+
+        <Image Grid.Column="0"
+               HeightRequest="15"
+               WidthRequest="50"
+               Source="{AppThemeBinding Light=left_arrow.png, Dark=left_arrow_dark.png}" >
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=previous_month_command}" />
+            </Image.GestureRecognizers>
+        </Image>
+
+        <Label Text="{Binding Source={x:Reference this}, Path=_tempDate, StringFormat='{0: MMMMMMMMM yyyy}'}"
+               FontSize="16"
+               Grid.Column="1"
+               HorizontalOptions="Center"
+               FontAttributes="Bold" />
+
+        <Image HeightRequest="15"
+               WidthRequest="50"
+               Grid.Column="2"
+               Source="{AppThemeBinding Light=right_arrow.png, Dark=right_arrow_dark.png}" >
+
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=next_month_command}" />
+            </Image.GestureRecognizers>
+        </Image>
+    </Grid>
+
+    <CollectionView ItemsSource="{Binding Source={x:Reference this}, Path=dates}">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Horizontal" 
+                               ItemSpacing="10"/>
+
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:CalendarDay">
+                <Border WidthRequest="80"
+                        HeightRequest="120"
+                        Padding="15">
+
+                    <Grid RowDefinitions="Auto, Auto, *"
+                          ColumnDefinitions="*">
+
+                        <Label Text="{Binding date, StringFormat='{0:ddd }'}" 
+                               HorizontalOptions="Center"
+                               Grid.Row="0"
+                               FontSize="18" >
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <Label Text="{Binding date, StringFormat='{0:d }'}" 
+                               FontSize="24" 
+                               HorizontalOptions="Center"
+                               Grid.Row="1"
+                               FontAttributes="Bold">
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+
+                        <Frame Grid.Row="2"
+                               x:Name="has_entry_display"
+                               Margin="10"
+                               BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}"     
+                               IsVisible="{Binding Has_Entry}"/>
+                    </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="True">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="{AppThemeBinding Light={StaticResource CustomSelectedCalendarLight}, Dark={StaticResource CustomSelectedCalendarDark}}" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="False">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="Transparent" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=current_date_command}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+    <Grid ColumnDefinitions="*, *"
+          RowDefinitions="*">
+
+        <Label Text="{Binding Source={x:Reference this}, Path=selected_date, StringFormat='{0: MMMMMMMMM d, yyyy}'}"
+               FontSize="16"
+               Grid.Column="0"
+               HorizontalOptions="Start"
+               Margin="10"
+               FontAttributes="Bold" />
+
+        <Button Grid.Column="1"
+                WidthRequest="150"
+                CornerRadius="50"
+                Clicked="Jump_To_Current_Date"
+                Text="Current Date" />
+    </Grid>
+</StackLayout>

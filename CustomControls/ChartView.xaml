@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:models="clr-namespace:WorkoutLog.Model"
+      xmlns:cells="clr-namespace:WorkoutLog.Cells"
+      x:Class="Fitness_Log.CustomControls.ChartView"
+      x:Name="this"
+      ColumnDefinitions="40, *"
+      RowDefinitions="*, 30">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="Min_Group_6">
+                <Border Stroke="Transparent"
+                        BackgroundColor="Transparent"
+                        WidthRequest="55">
+
+                    <Grid RowDefinitions="*, *, *, *, *, *, Auto"
+                          ColumnDefinitions="*">
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*"
+                              x:Name="dot_value_group"
+                              TranslationY="{Binding y_adjustment}"
+                              VerticalOptions="Center"
+                              Grid.Row="0">
+
+                            <Label Text="{Binding weight}" 
+                                   x:Name="weight_value_entry_display"                               
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"       
+                                   Margin="-20"
+                                   FontSize="14" >
+
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                        <Setter Property="TextColor"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Frame x:Name="entry_dot_display"
+                                   VerticalOptions="Center"
+                                   WidthRequest="5"
+                                   HeightRequest="5"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}" />
+                        </Grid>
+
+                        <Label Text="{Binding date, StringFormat='{0:M/d/yy}'}" 
+                               FontSize="12" 
+                               VerticalOptions="End"
+                               HorizontalOptions="Center"
+                               Grid.Row="6"
+                               FontAttributes="Bold">
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="True">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="LightBlue" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="False">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="Transparent" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=current_date_command}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Min_Group_5">
+                <Border Stroke="Transparent"
+                        BackgroundColor="Transparent"
+                        WidthRequest="55">
+
+                    <Grid RowDefinitions="*, *, *, *, *, *, Auto"
+                          ColumnDefinitions="*">
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*"
+                              x:Name="dot_value_group"
+                              TranslationY="{Binding y_adjustment}"
+                              VerticalOptions="Center"
+                              Grid.Row="1">
+
+                            <Label Text="{Binding weight}" 
+                                   x:Name="weight_value_entry_display"                               
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"       
+                                   Margin="-20"
+                                   FontSize="14" >
+
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                        <Setter Property="TextColor"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Frame x:Name="entry_dot_display"
+                                   VerticalOptions="Center"
+                                   WidthRequest="5"
+                                   HeightRequest="5"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}"/>
+                        </Grid>
+
+                        <Label Text="{Binding date, StringFormat='{0:M/d/yy}'}" 
+                               FontSize="12" 
+                               VerticalOptions="End"
+                               HorizontalOptions="Center"
+                               Grid.Row="6"
+                               FontAttributes="Bold">
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="True">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="LightBlue" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="False">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="Transparent" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=current_date_command}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Min_Group_4">
+                <Border Stroke="Transparent"
+                        BackgroundColor="Transparent"
+                        WidthRequest="55">
+
+                    <Grid RowDefinitions="*, *, *, *, *, *, Auto"
+                          ColumnDefinitions="*">
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*"
+                              x:Name="dot_value_group"
+                              TranslationY="{Binding y_adjustment}"
+                              VerticalOptions="Center"
+                              Grid.Row="2">
+
+                            <Label Text="{Binding weight}" 
+                                   x:Name="weight_value_entry_display"                               
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"       
+                                   Margin="-20"
+                                   FontSize="14" >
+
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                        <Setter Property="TextColor"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Frame x:Name="entry_dot_display"
+                                   VerticalOptions="Center"
+                                   WidthRequest="5"
+                                   HeightRequest="5"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}"/>
+                        </Grid>
+
+                        <Label Text="{Binding date, StringFormat='{0:M/d/yy}'}" 
+                               FontSize="12" 
+                               VerticalOptions="End"
+                               HorizontalOptions="Center"
+                               Grid.Row="6"
+                               FontAttributes="Bold">
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="True">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="LightBlue" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="False">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="Transparent" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=current_date_command}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Min_Group_3">
+                <Border Stroke="Transparent"
+                        BackgroundColor="Transparent"
+                        WidthRequest="55">
+
+                    <Grid RowDefinitions="*, *, *, *, *, *, Auto"
+                          ColumnDefinitions="*">
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*"
+                              x:Name="dot_value_group"
+                              TranslationY="{Binding y_adjustment}"
+                              VerticalOptions="Center"
+                              Grid.Row="3">
+
+                            <Label Text="{Binding weight}" 
+                                   x:Name="weight_value_entry_display"                               
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"       
+                                   Margin="-20"
+                                   FontSize="14" >
+
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                        <Setter Property="TextColor"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Frame x:Name="entry_dot_display"
+                                   VerticalOptions="Center"
+                                   WidthRequest="5"
+                                   HeightRequest="5"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}"/>
+                        </Grid>
+
+                        <Label Text="{Binding date, StringFormat='{0:M/d/yy}'}" 
+                               FontSize="12" 
+                               VerticalOptions="End"
+                               HorizontalOptions="Center"
+                               Grid.Row="6"
+                               FontAttributes="Bold">
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="True">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="LightBlue" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="False">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="Transparent" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=current_date_command}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Min_Group_2">
+                <Border Stroke="Transparent"
+                        BackgroundColor="Transparent"
+                        WidthRequest="55">
+
+                    <Grid RowDefinitions="*, *, *, *, *, *, Auto"
+                          ColumnDefinitions="*">
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*"
+                              x:Name="dot_value_group"
+                              TranslationY="{Binding y_adjustment}"
+                              VerticalOptions="Center"
+                              Grid.Row="4">
+
+                            <Label Text="{Binding weight}" 
+                                   x:Name="weight_value_entry_display"                               
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"       
+                                   Margin="-20"
+                                   FontSize="14" >
+
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                        <Setter Property="TextColor"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Frame x:Name="entry_dot_display"
+                                   VerticalOptions="Center"
+                                   WidthRequest="5"
+                                   HeightRequest="5"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}"/>
+                        </Grid>
+
+                        <Label Text="{Binding date, StringFormat='{0:M/d/yy}'}" 
+                               FontSize="12" 
+                               VerticalOptions="End"
+                               HorizontalOptions="Center"
+                               Grid.Row="6"
+                               FontAttributes="Bold">
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="True">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="LightBlue" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="False">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="Transparent" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=current_date_command}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Group_1">
+                <Border Stroke="Transparent"
+                        BackgroundColor="Transparent"
+                        WidthRequest="55">
+
+                    <Grid RowDefinitions="*, *, *, *, *, *, Auto"
+                          ColumnDefinitions="*">
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="*"
+                              x:Name="dot_value_group"
+                              TranslationY="{Binding y_adjustment}"
+                              VerticalOptions="Center"
+                              Grid.Row="5">
+
+                            <Label Text="{Binding weight}" 
+                                   x:Name="weight_value_entry_display"                               
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="End"       
+                                   Margin="-20"
+                                   FontSize="14" >
+
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                        <Setter Property="TextColor"
+                                            Value="White" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Frame x:Name="entry_dot_display"
+                                   VerticalOptions="Center"
+                                   WidthRequest="5"
+                                   HeightRequest="5"
+                                   BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}"/>
+                        </Grid>
+
+                        <Label Text="{Binding date, StringFormat='{0:M/d/yy}'}" 
+                               FontSize="12" 
+                               VerticalOptions="End"
+                               HorizontalOptions="Center"
+                               Grid.Row="6"
+                               FontAttributes="Bold">
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" 
+                                             Binding="{Binding is_current_date}" 
+                                             Value="True">
+
+                                    <Setter Property="TextColor"
+                                            Value="White" />
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    </Grid>
+
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="True">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="LightBlue" />
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Border"
+                                     Binding="{Binding is_current_date}"
+                                     Value="False">
+
+                            <Setter Property="BackgroundColor"
+                                    Value="Transparent" />
+                        </DataTrigger>
+                    </Border.Triggers>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=current_date_command}"
+                                              CommandParameter="{Binding .}" />
+                    </Border.GestureRecognizers>
+                </Border>
+            </DataTemplate>
+
+
+            <cells:EntryDataTemplateSelector x:Key="EntryLocationFinder"
+                                             Min_Group_6="{StaticResource Min_Group_6}"
+                                             Min_Group_5="{StaticResource Min_Group_5}"
+                                             Min_Group_4="{StaticResource Min_Group_4}"
+                                             Min_Group_3="{StaticResource Min_Group_3}"
+                                             Min_Group_2="{StaticResource Min_Group_2}"
+                                             Group_1="{StaticResource Group_1}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*, *, *, *, *, *"
+          ColumnDefinitions="*"
+          HorizontalOptions="Start"
+          Grid.Row="0"
+          Grid.Column="1">
+
+        <BoxView Grid.Row="0"
+                 HeightRequest="1"  
+                 VerticalOptions="Center"/>
+
+        <BoxView Grid.Row="1"
+                 HeightRequest="1"  
+                 VerticalOptions="Center"/>
+
+        <BoxView Grid.Row="2"
+                 HeightRequest="1"  
+                 VerticalOptions="Center"/>
+
+        <BoxView Grid.Row="3"
+                 HeightRequest="1"  
+                 VerticalOptions="Center"/>
+
+        <BoxView Grid.Row="4"
+                 HeightRequest="1"  
+                 VerticalOptions="Center"/>
+
+        <BoxView Grid.Row="5"
+                 HeightRequest="1"  
+                 VerticalOptions="Center"/>
+    </Grid>
+
+    <Grid RowDefinitions="*, *, *, *, *, *"
+          ColumnDefinitions="*"
+          HorizontalOptions="Start"
+          Grid.Row="0"
+          Grid.Column="0">
+
+        <Label x:Name="y_axis_6"
+               Text="---"
+               VerticalOptions="Center"
+               Grid.Row="0" />
+
+        <Label x:Name="y_axis_5"
+               Text="---"
+               VerticalOptions="Center"
+               Grid.Row="1" />
+
+        <Label x:Name="y_axis_4"
+               Text="---"
+               VerticalOptions="Center"
+               Grid.Row="2" />
+
+        <Label x:Name="y_axis_3"
+               Text="---"
+               VerticalOptions="Center"
+               Grid.Row="3" />
+
+        <Label x:Name="y_axis_2"
+               Text="---"
+               VerticalOptions="Center"
+               Grid.Row="4" />
+
+        <Label x:Name="y_axis_1"
+               Text="---"
+               VerticalOptions="Center"
+               Grid.Row="5" />
+    </Grid>
+
+    <CollectionView ItemsSource="{Binding Source={x:Reference this}, Path=entries}"
+                    ItemTemplate="{StaticResource EntryLocationFinder}"
+                    Grid.RowSpan="2"
+                    Grid.Column="1">
+
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Horizontal" />
+        </CollectionView.ItemsLayout>
+    </CollectionView>
+</Grid>
