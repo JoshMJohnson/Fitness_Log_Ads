@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customControls="clr-namespace:WorkoutLog.CustomControls"
+             xmlns:model="clr-namespace:WorkoutLog.Model"
+             x:Class="Fitness_Log.WorkoutCalendar"
+             Title="Workout Calendar">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="-"
+                     Clicked="Unrecord_Exercise" />
+        <ToolbarItem Text="+"
+                     Clicked="Record_Exercise" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <Grid ColumnDefinitions="*, *"
+              RowDefinitions="200, Auto, *" >
+
+            <Grid RowDefinitions="Auto, *"
+                  ColumnDefinitions="*"
+                  Grid.Row="0"
+                  Grid.Column="0" >
+
+                <Grid Grid.Row="0"
+                      Grid.Column="0"
+                      RowDefinitions="*, *"
+                      Margin="10">
+
+                    <Label Text="Exercise"
+                           FontAttributes="Bold"
+                           Grid.Row="0"
+                           HorizontalOptions="Center"
+                           FontSize="20" />
+
+                    <Label Text="Categories"
+                           FontAttributes="Bold"
+                           Grid.Row="1"
+                           HorizontalOptions="Center"
+                           FontSize="20" />
+                </Grid>
+
+                <Grid x:Name="category_layout" 
+                      RowDefinitions="*"
+                      ColumnDefinitions="*"
+                      Grid.Row="1">
+
+                    <CollectionView x:Name="workout_category_display"
+                                    VerticalOptions="Start" >
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Category">
+                                <Label Text="{Binding name}"
+                                       FontAttributes="Italic"
+                                       Padding="5"
+                                       HorizontalOptions="Center" />
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="0"
+                  Grid.Column="1"
+                  RowDefinitions="*, *"
+                  VerticalOptions="Center" >
+
+                <Button Text="Create Category"
+                        Grid.Row="0"
+                        Margin="4"
+                        CornerRadius="100"
+                        LineBreakMode="WordWrap"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Clicked="Create_Category" />
+
+                <Button Text="Delete Category"
+                        Grid.Row="1"
+                        Margin="-2"
+                        CornerRadius="100"
+                        LineBreakMode="WordWrap"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Clicked="Remove_Category" />
+            </Grid>
+
+            <customControls:CalendarView Grid.Row="1"
+                                         Grid.ColumnSpan="2"
+                                         Margin="10" 
+                                         x:Name="horizontal_calendar_display"
+                                         on_date_selected="Horizontal_Calendar_On_Date_Selected" />
+
+            <Grid x:Name="calendar_day_exercise_display"
+                  Grid.ColumnSpan="2"
+                  Grid.Row="2"
+                  RowDefinitions="*"
+                  ColumnDefinitions="*" >
+
+                <CollectionView x:Name="workout_selected_date_exercise_display">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="model:CalendarEntry">
+                            <HorizontalStackLayout Padding="5"
+                                               HorizontalOptions="Center">
+
+                                <Label Text="{Binding calendar_category_name}" 
+                                       Margin="5"
+                                       FontAttributes="Italic"
+                                       FontSize="16"/>
+                            </HorizontalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

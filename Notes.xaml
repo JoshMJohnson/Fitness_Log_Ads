@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:WorkoutLog.Model"
+             x:Class="Fitness_Log.Notes"
+             Title="Notes">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Clicked="Add_Note" />
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="notes_layout"
+          RowDefinitions="*"
+          ColumnDefinitions="*">
+
+        <CollectionView x:Name="notes_display"
+                        SelectionMode="Single"
+                        SelectionChanged="View_Note"
+                        VerticalOptions="Start" >
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Note">
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="1" />
+                        </Border.Shadow>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal"></VisualState>
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="LightSkyBlue"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid RowDefinitions="*, *"
+                              ColumnDefinitions="Auto, *, Auto"
+                              Margin="10">
+
+                            <Label Grid.RowSpan="2"
+                                   VerticalOptions="Center"
+                                   Grid.Column="0"
+                                   Text="{Binding name}"/>
+
+                            <Label Grid.Column="2"
+                                   Grid.Row="0"
+                                   HorizontalOptions="End"
+                                   Text="Last Modified"/>
+
+                            <Label Grid.Column="2"
+                                   Grid.Row="1"
+                                   HorizontalOptions="End"
+                                   Text="{Binding last_edited_date_string}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

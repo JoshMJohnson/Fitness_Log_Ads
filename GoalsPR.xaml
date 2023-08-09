@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:WorkoutLog.Model"
+             xmlns:cells="clr-namespace:WorkoutLog.Cells"
+             x:Class="Fitness_Log.GoalsPR"
+             Title="Goals">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Clicked="Add_PR_Goal" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="Is_Weight_PR_Goal">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="weight_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*, Auto"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       Grid.ColumnSpan="2"
+                                       HorizontalOptions="End" />
+
+                                <Label Text="{Binding weight}"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Label Text=" lbs."
+                                       Grid.Row="1"
+                                       Grid.Column="1"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Is_Time_PR_Goal_HMS">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="time_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Grid Grid.Row="1"                                      
+                                      RowDefinitions="Auto, Auto, Auto"
+                                      VerticalOptions="End"
+                                      HorizontalOptions="End"
+                                      ColumnDefinitions="*, Auto" >
+
+                                    <Label Text="{Binding time_hours}"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalOptions="End"
+                                           FontSize="14"  />
+
+                                    <Label Text=" H"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+
+                                    <Label Text="{Binding time_min}"
+                                           Grid.Row="1"
+                                           HorizontalOptions="End"
+                                           Grid.Column="0"
+                                           FontSize="14" />
+
+                                    <Label Text=" M"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           Grid.Row="1"
+                                           FontSize="14"  />
+
+                                    <Label Text="{Binding time_sec}"
+                                           Grid.Column="0"
+                                           Grid.Row="2"
+                                           HorizontalOptions="End"
+                                           FontSize="14" />
+
+                                    <Label Text=" S"
+                                           Grid.Column="1"
+                                           Grid.Row="2"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Is_Time_PR_Goal_HM">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="time_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Grid Grid.Row="1"                                      
+                                      RowDefinitions="Auto, Auto"
+                                      VerticalOptions="End"
+                                      HorizontalOptions="End"
+                                      ColumnDefinitions="*, Auto" >
+
+                                    <Label Text="{Binding time_hours}"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalOptions="End"
+                                           FontSize="14"  />
+
+                                    <Label Text=" H"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+
+                                    <Label Text="{Binding time_min}"
+                                           Grid.Row="1"
+                                           HorizontalOptions="End"
+                                           Grid.Column="0"
+                                           FontSize="14" />
+
+                                    <Label Text=" M"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           Grid.Row="1"
+                                           FontSize="14"  />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Is_Time_PR_Goal_HS">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="time_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Grid Grid.Row="1"                                      
+                                      RowDefinitions="Auto, Auto"
+                                      VerticalOptions="End"
+                                      HorizontalOptions="End"
+                                      ColumnDefinitions="*, Auto" >
+
+                                    <Label Text="{Binding time_hours}"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalOptions="End"
+                                           FontSize="14"  />
+
+                                    <Label Text=" H"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+
+                                    <Label Text="{Binding time_sec}"
+                                           Grid.Column="0"
+                                           Grid.Row="1"
+                                           HorizontalOptions="End"
+                                           FontSize="14" />
+
+                                    <Label Text=" S"
+                                           Grid.Column="1"
+                                           Grid.Row="1"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Is_Time_PR_Goal_H">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="time_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Grid Grid.Row="1"                                      
+                                      RowDefinitions="Auto"
+                                      VerticalOptions="End"
+                                      HorizontalOptions="End"
+                                      ColumnDefinitions="*, Auto" >
+
+                                    <Label Text="{Binding time_hours}"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalOptions="End"
+                                           FontSize="14"  />
+
+                                    <Label Text=" H"
+                                           Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Is_Time_PR_Goal_MS">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="time_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Grid Grid.Row="1"                                      
+                                      RowDefinitions="Auto, Auto"
+                                      VerticalOptions="End"
+                                      HorizontalOptions="End"
+                                      ColumnDefinitions="*, Auto" >
+
+                                    <Label Text="{Binding time_min}"
+                                           Grid.Row="0"
+                                           HorizontalOptions="End"
+                                           Grid.Column="0"
+                                           FontSize="14" />
+
+                                    <Label Text=" M"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           Grid.Row="0"
+                                           FontSize="14"  />
+
+                                    <Label Text="{Binding time_sec}"
+                                           Grid.Column="0"
+                                           Grid.Row="1"
+                                           HorizontalOptions="End"
+                                           FontSize="14" />
+
+                                    <Label Text=" S"
+                                           Grid.Column="1"
+                                           Grid.Row="1"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Is_Time_PR_Goal_M">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="time_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Grid Grid.Row="1"                                      
+                                      RowDefinitions="*"
+                                      VerticalOptions="End"
+                                      HorizontalOptions="End"
+                                      ColumnDefinitions="*, Auto" >
+
+                                    <Label Text="{Binding time_min}"
+                                           Grid.Row="0"
+                                           HorizontalOptions="End"
+                                           Grid.Column="0"
+                                           FontSize="14" />
+
+                                    <Label Text=" M"
+                                           Grid.Column="1"
+                                           HorizontalOptions="Center"
+                                           Grid.Row="0"
+                                           FontSize="14"  />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Is_Time_PR_Goal_S">
+                <SwipeView>
+                    <SwipeView.LeftItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="trash_icon.png"
+                                       BackgroundColor="red"
+                                       Clicked="Remove_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.LeftItems>
+
+                    <SwipeView.RightItems>
+                        <SwipeItems SwipeBehaviorOnInvoked="Close">
+                            <SwipeItem IconImageSource="edit_icon.png"
+                                       BackgroundColor="LightBlue"
+                                       Clicked="Edit_PR_Goal"
+                                       BindingContext="{Binding name}"/>
+
+                        </SwipeItems>
+                    </SwipeView.RightItems>
+
+                    <Border Margin="5">
+                        <Border.Shadow>
+                            <Shadow Brush="Black"
+                                    Offset="20,20"
+                                    Radius="40"
+                                    Opacity="0.8" />
+                        </Border.Shadow>
+
+                        <Grid RowDefinitions="*"
+                              ColumnDefinitions="50, *, *"
+                              VerticalOptions="Center"
+                              Margin="10">
+
+                            <Image Grid.Column="0"
+                                   WidthRequest="40"
+                                   HeightRequest="40"
+                                   Source="time_icon.png" />
+
+                            <Label Text="{Binding name}"
+                                   Grid.Column="1"
+                                   Padding="10"
+                                   VerticalOptions="Center"
+                                   FontSize="16" />
+
+                            <Grid Grid.Column="2"
+                                  RowDefinitions="*, *"
+                                  ColumnDefinitions="*"
+                                  HorizontalOptions="End" >
+
+                                <Label Text="{Binding goal_achieve_by_date}"
+                                       Grid.Row="0"
+                                       FontSize="14"
+                                       HorizontalOptions="End" />
+
+                                <Grid Grid.Row="1"                                      
+                                      RowDefinitions="Auto"
+                                      VerticalOptions="End"
+                                      HorizontalOptions="End"
+                                      ColumnDefinitions="*, Auto" >
+
+                                    <Label Text="{Binding time_sec}"
+                                           Grid.Column="0"
+                                           Grid.Row="2"
+                                           HorizontalOptions="End"
+                                           FontSize="14" />
+
+                                    <Label Text=" S"
+                                           Grid.Column="1"
+                                           Grid.Row="0"
+                                           HorizontalOptions="Center"
+                                           FontSize="14"  />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </SwipeView>
+            </DataTemplate>
+
+            <cells:PRGoalDataTemplateSelector x:Key="PRGoalTypeSelector"
+                                              Is_Weight_PR_Goal="{StaticResource Is_Weight_PR_Goal}"
+                                              Is_Time_PR_Goal_HMS="{StaticResource Is_Time_PR_Goal_HMS}"
+                                              Is_Time_PR_Goal_HM="{StaticResource Is_Time_PR_Goal_HM}"
+                                              Is_Time_PR_Goal_HS="{StaticResource Is_Time_PR_Goal_HS}"
+                                              Is_Time_PR_Goal_H="{StaticResource Is_Time_PR_Goal_H}"
+                                              Is_Time_PR_Goal_MS="{StaticResource Is_Time_PR_Goal_MS}"
+                                              Is_Time_PR_Goal_M="{StaticResource Is_Time_PR_Goal_M}"
+                                              Is_Time_PR_Goal_S="{StaticResource Is_Time_PR_Goal_S}" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid x:Name="goal_pr_layout"
+          RowDefinitions="*"
+          ColumnDefinitions="*">
+
+        <CollectionView x:Name="pr_goals_display"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Start"
+                        ItemTemplate="{StaticResource PRGoalTypeSelector}" />
+    </Grid>
+</ContentPage>

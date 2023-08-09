@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:WorkoutLog.Model"
+             xmlns:customControls="clr-namespace:WorkoutLog.CustomControls"
+             x:Class="Fitness_Log.BodyWeight"
+             Title="Body Weight">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Clicked="Record_Body_Weight" />
+    </ContentPage.ToolbarItems>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *"
+          ColumnDefinitions="*"
+          Padding="10">
+
+        <Border Stroke="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Secondary}}"
+                StrokeThickness="4"
+                Grid.Row="0">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10,10,10,10" />
+            </Border.StrokeShape>
+
+            <Grid RowDefinitions="75, 10, 75"
+                  ColumnDefinitions="*, Auto, *, Auto, *" 
+                  Padding="5"
+                  BackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Primary}}" >
+
+                <BoxView Grid.Row="1"
+                         Grid.ColumnSpan="5"
+                         Margin="5,0,5,0"                   
+                         HeightRequest="2"  
+                         VerticalOptions="Fill"/>
+
+                <BoxView Grid.RowSpan="3"
+                         Grid.Column="1"
+                         Margin="0,5,0,5"                   
+                         WidthRequest="2"  
+                         VerticalOptions="Fill"/>
+
+                <BoxView Grid.RowSpan="3"
+                         Grid.Column="3"
+                         Margin="0,5,0,5"                   
+                         WidthRequest="2"  
+                         VerticalOptions="Fill"/>
+
+                <Grid Grid.Row="0"
+                      Grid.Column="0"                  
+                      RowDefinitions="*, *" >
+
+                    <Label Text="Actual"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"                           
+                           HorizontalOptions="Center" />
+
+                    <Label x:Name="actual_weight_display"
+                           Grid.Row="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </Grid>
+
+                <Grid Grid.Row="0"
+                      Grid.Column="2"
+                      RowDefinitions="*, *" 
+                      ColumnDefinitions="*">
+
+                    <Label Text="Recent Change"
+                           LineBreakMode="WordWrap"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"/>
+
+                    <Label x:Name="change_weight_display"
+                           Grid.Row="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </Grid>
+
+                <Grid Grid.Row="0"
+                      Grid.Column="4"
+                      RowDefinitions="*, *"
+                      ColumnDefinitions="*, 0">
+
+                    <Label Text="Closest Goal (Date)"
+                           LineBreakMode="WordWrap"
+                           VerticalOptions="Center"
+                           Grid.Row="0"
+                           Grid.ColumnSpan="2"
+                           FontAttributes="Bold"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center" />
+
+                    <Label x:Name="goal_display"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+                    <Button ImageSource="{AppThemeBinding Light=refresh_icon.png, Dark=refresh_icon_dark.png}"
+                            BackgroundColor="Transparent"
+                            Clicked="Refresh_Table"
+                            WidthRequest="30"
+                            HeightRequest="30"
+                            HorizontalOptions="End"
+                            Grid.Row="1"
+                            Grid.Column="1" />
+                </Grid>
+
+                <Grid Grid.Row="2"
+                      Grid.Column="0"
+                      RowDefinitions="*, *" >
+
+                    <Label Text="Last 7 Days"
+                           LineBreakMode="WordWrap"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+                    <Label x:Name="week_change_display"
+                           Grid.Row="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </Grid>
+
+                <Grid Grid.Row="2"
+                      Grid.Column="2"
+                      RowDefinitions="*, *" >
+
+                    <Label Text="Last 30 Days"
+                           LineBreakMode="WordWrap"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+                    <Label x:Name="month_change_display"
+                           Grid.Row="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </Grid>
+
+                <Grid Grid.Row="2"
+                      Grid.Column="4"
+                      RowDefinitions="*, *" >
+
+                    <Label Text="Total Change"
+                           LineBreakMode="WordWrap"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+
+                    <Label x:Name="total_change_display"
+                           Grid.Row="1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center" />
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Label Text="values are in lbs.  "
+               FontAttributes="Italic"
+               FontSize="12"
+               HorizontalOptions="End"
+               Grid.Row="2" />
+
+        <customControls:ChartView Grid.Row="3"
+                                  x:Name="chart_display"                                  
+                                  on_entry_selected="Entry_Selected" />
+    </Grid>
+</ContentPage>

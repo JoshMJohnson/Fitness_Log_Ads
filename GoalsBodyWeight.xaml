@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:WorkoutLog.Model"
+             x:Class="Fitness_Log.GoalsBodyWeight"
+             Title="Goals">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Clicked="Add_Body_Weight_Goal"/>
+    </ContentPage.ToolbarItems>
+
+    <Grid x:Name="goal_bw_layout"
+          RowDefinitions="*"
+          ColumnDefinitions="*">
+
+        <CollectionView x:Name="body_weight_goals_display"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Start">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:GoalBW">
+                    <SwipeView>
+                        <SwipeView.LeftItems>
+                            <SwipeItems SwipeBehaviorOnInvoked="Close">
+                                <SwipeItem IconImageSource="trash_icon.png"
+                                           BackgroundColor="red"
+                                           Clicked="Remove_Body_Weight_Goal"
+                                           BindingContext="{Binding name}"/>
+
+                            </SwipeItems>
+                        </SwipeView.LeftItems>
+
+                        <SwipeView.RightItems>
+                            <SwipeItems SwipeBehaviorOnInvoked="Close">
+                                <SwipeItem IconImageSource="edit_icon.png"
+                                           BackgroundColor="LightBlue"
+                                           Clicked="Edit_Body_Weight_Goal"
+                                           BindingContext="{Binding name}"/>
+
+                            </SwipeItems>
+                        </SwipeView.RightItems>
+
+                        <Border Margin="5">
+                            <Border.Shadow>
+                                <Shadow Brush="Black"
+                                        Offset="20,20"
+                                        Radius="40"
+                                        Opacity="1" />
+                            </Border.Shadow>
+
+                            <Grid RowDefinitions="*"
+                                  ColumnDefinitions="*, *"
+                                  VerticalOptions="Center"
+                                  Margin="10">
+
+                                <Label Text="{Binding name}"
+                                       Grid.Column="0"
+                                       FontSize="16"
+                                       Margin="10"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start" />
+
+                                <Grid Grid.Column="1"
+                                      RowDefinitions="*, *"
+                                      ColumnDefinitions="*, Auto"
+                                      HorizontalOptions="End" >
+
+                                    <Label Text="{Binding goal_achieve_by_date}"
+                                           Grid.Row="0"
+                                           FontSize="14"
+                                           Grid.ColumnSpan="2"
+                                           HorizontalOptions="End" />
+
+                                    <Label Text="{Binding weight}"
+                                           Grid.Row="1"
+                                           FontSize="14"
+                                           HorizontalOptions="End" />
+
+                                    <Label Text=" lbs."
+                                           Grid.Row="1"
+                                           Grid.Column="1"
+                                           FontSize="14"
+                                           HorizontalOptions="End" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>
