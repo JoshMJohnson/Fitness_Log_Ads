@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Fitness_Log.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Fitness_Log"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Primary}}"
+    Shell.FlyoutWidth="210"
+    Shell.FlyoutBehavior="Flyout">
+
+    <Shell.FlyoutHeader>
+        <Image Source="fitness_log_splash.svg" 
+               x:Name="header_image"
+               HeightRequest="185"/>
+
+    </Shell.FlyoutHeader>
+
+    <ShellContent Title="Body Progression"
+                Icon="shell_icon_body_progression.png"
+                ContentTemplate="{DataTemplate local:BodyProgression}"
+                Route="BodyProgression" />
+
+    <ShellContent Title="Body Weight"
+                  Icon="shell_icon_body_weight.png"
+                  ContentTemplate="{DataTemplate local:BodyWeight}"        
+                  Route="BodyWeight" />
+
+    <FlyoutItem Title="Goals"
+                Icon="shell_icon_goals.png">
+
+        <Tab Title="Body Weight">
+            <ShellContent ContentTemplate="{DataTemplate local:GoalsBodyWeight}"/>
+        </Tab>
+        <Tab Title="Personal Records">
+            <ShellContent ContentTemplate="{DataTemplate local:GoalsPR}"/>
+        </Tab>
+    </FlyoutItem>
+
+    <ShellContent Title="Personal Records"
+                  Icon="shell_icon_pr.png"
+                  ContentTemplate="{DataTemplate local:PersonalRecords}"
+                  Route="PersonalRecords" />
+
+    <ShellContent Title="Workout Calendar"
+                  Icon="shell_icon_calendar.png"
+                  ContentTemplate="{DataTemplate local:WorkoutCalendar}"
+                  Route="WorkoutCalendar" />
+
+    <ShellContent Title="Notes"
+                  Icon="shell_icon_notes.png"
+                  ContentTemplate="{DataTemplate local:Notes}"
+                  Route="Notes" />
+
+    <Shell.FlyoutFooter>
+        <Grid RowDefinitions="Auto, Auto"
+              ColumnDefinitions="*"
+              Margin="10">
+
+            <Label Text="Today's Date"
+                   FontAttributes="Bold"
+                   Grid.Row="0"
+                   HorizontalOptions="Center" />
+
+            <Label x:Name="footer_date"
+                   Grid.Row="1"
+                   HorizontalOptions="Center" />
+        </Grid>
+    </Shell.FlyoutFooter>
+</Shell>
