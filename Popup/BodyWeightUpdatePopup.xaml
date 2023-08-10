@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="Fitness_Log.Popup.BodyWeightUpdatePopup"
+           VerticalOptions="Start"
+           HorizontalOptions="Center"
+           Color="Transparent"
+           Size="250, 295">
+
+    <Border Stroke="#87CEFA"
+            StrokeThickness="4"
+            HorizontalOptions="Center">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40,40,40,40" />
+        </Border.StrokeShape>
+
+        <Grid ColumnDefinitions="*, *" 
+              RowDefinitions="Auto, Auto, Auto, Auto, *">
+
+            <Label Text="BW Entry"
+                   FontAttributes="Italic"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="Start"
+                   LineHeight="100"
+                   MinimumWidthRequest="200"
+                   VerticalTextAlignment="Center"
+                   Margin="10"
+                   FontSize="24" />
+
+            <Button Grid.Row="0"
+                    Grid.Column="1"
+                    Clicked="Close_Edit_Popup"
+                    Margin="20"
+                    WidthRequest="40"
+                    HeightRequest="40"
+                    HorizontalOptions="End"
+                    TextColor="white"
+                    Text="X"/>
+
+            <Label Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   x:Name="error_prompt"
+                   IsVisible="False"
+                   FontAttributes="Italic"
+                   TextColor="Red"
+                   FontSize="11"
+                   HorizontalOptions="Center" />
+
+            <Grid Grid.Row="2"
+                  Grid.ColumnSpan="2"
+                  ColumnDefinitions="Auto, *, Auto"
+                  Margin="10" >
+
+                <Label Grid.Column="0"
+                       Text="Date:" 
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start" />
+
+                <Label Grid.Column="1"
+                            x:Name="record_date"
+                            HorizontalOptions="End"
+                            VerticalOptions="Center" />
+            </Grid>
+
+            <Grid Grid.Row="3"
+                  Grid.ColumnSpan="2"
+                  Margin="10"
+                  RowDefinitions="*"
+                  ColumnDefinitions="Auto, *, Auto">
+
+                <Label Grid.Column="0"
+                       VerticalOptions="Center"
+                       Text="Weight (lbs):" />
+
+                <Entry Keyboard="Numeric"
+                   x:Name="weight_entry"
+                   Grid.Column="2"
+                   VerticalOptions="Center"
+                   MaxLength="5"
+                   HorizontalTextAlignment="Center"
+                   Placeholder="200" />
+            </Grid>
+
+            <Grid Grid.Row="4"
+                  Grid.ColumnSpan="2"
+                  Margin="10"
+                  ColumnDefinitions="*, *">
+
+                <Button Text="Edit"
+                        Grid.Column="0"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" 
+                        WidthRequest="75"
+                        Clicked="Edit_Body_Weight_Entry" />
+
+                <Button Text="Delete"
+                        Grid.Column="1"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="75"
+                        Clicked="Delete_Body_Weight_Entry" />
+            </Grid>
+        </Grid>
+    </Border>
+</mct:Popup>

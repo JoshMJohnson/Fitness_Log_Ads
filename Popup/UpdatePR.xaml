@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="Fitness_Log.Popup.UpdatePR"
+           VerticalOptions="Start"
+           HorizontalOptions="Center"
+           Color="Transparent"
+           Size="300, 340">
+
+    <ScrollView MinimumHeightRequest="340">
+        <Border Stroke="#87CEFA"
+                StrokeThickness="4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40,40,40,40" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="Auto, *" 
+                  RowDefinitions="Auto, Auto, Auto, Auto, Auto, *">
+
+                <Label Text="PR"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       LineHeight="100"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Italic"
+                       HorizontalOptions="Start"
+                       MinimumWidthRequest="200"
+                       Margin="10"
+                       FontSize="24" />
+
+                <Button Grid.Row="0"
+                        Grid.Column="1"
+                        Clicked="Cancel_PR_Update"
+                        Margin="20"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        HorizontalOptions="End"
+                        TextColor="white"
+                        Text="X"/>
+
+                <Label Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       x:Name="error_prompt"
+                       IsVisible="False"
+                       FontAttributes="Italic"
+                       TextColor="Red"
+                       FontSize="11"
+                       HorizontalOptions="Center" />
+
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       Text="Exercise:" 
+                       Margin="10" 
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+
+                <Label Grid.Row="2"
+                       Grid.Column="1"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       Margin="10" 
+                       x:Name="update_pr_exercise_name" />
+
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       Text="Date Achieved:"
+                       Margin="10"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center" />
+
+                <DatePicker x:Name="record_date"
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            HorizontalOptions="End" 
+                            VerticalOptions="Center"
+                            Margin="10" />
+
+                <Grid Grid.Row="4"
+                      Grid.ColumnSpan="2"
+                      RowDefinitions="*"
+                      ColumnDefinitions="Auto, *, 40, Auto, 25, Auto, 25, Auto"
+                      x:Name="time_display" 
+                      Margin="10" >
+
+                    <Label Grid.Column="0"
+                           Text="Time:"
+                           VerticalOptions="Center" />
+
+                    <Entry Keyboard="Numeric"
+                           Grid.Column="2"
+                           MaxLength="4"
+                           x:Name="hr_pr"
+                           HorizontalTextAlignment="Center"
+                           Placeholder="0" />
+
+                    <Label Grid.Column="3"
+                           Text="hrs" 
+                           Margin="10" />
+
+                    <Entry Keyboard="Numeric"
+                           Grid.Column="4"
+                           MaxLength="2"
+                           x:Name="min_pr"
+                           HorizontalTextAlignment="Center"
+                           Placeholder="0" />
+
+                    <Label Grid.Column="5"
+                           Text="mins" 
+                           Margin="10" />
+
+                    <Entry Keyboard="Numeric"
+                           Grid.Column="6"
+                           MaxLength="2"
+                           x:Name="sec_pr"
+                           HorizontalTextAlignment="Center"
+                           Placeholder="0" />
+
+                    <Label Grid.Column="7"
+                           Text="secs" 
+                           Margin="10" />
+                </Grid>
+
+                <Grid Grid.Row="4"
+                      Grid.ColumnSpan="2"
+                      Margin="10"
+                      x:Name="weight_display">
+
+                    <Label Grid.Row="3"
+                           Grid.Column="0"
+                           Text="Weight (lbs):" 
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center" />
+
+                    <Entry Keyboard="Numeric"
+                           Grid.Column="1"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           MaxLength="4"
+                           x:Name="weight_pr"
+                           Placeholder="100"/>
+                </Grid>
+
+                <Button Text="Update"
+                        Grid.Row="5"
+                        Grid.ColumnSpan="2"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" 
+                        Clicked="Submit_PR_Update"
+                        WidthRequest="100"
+                        Margin="10" />
+            </Grid>
+        </Border>
+    </ScrollView>
+</mct:Popup>

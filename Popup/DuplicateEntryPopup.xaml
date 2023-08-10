@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="Fitness_Log.Popup.DuplicateEntryPopup"
+           VerticalOptions="Start"
+           HorizontalOptions="Center"
+           Color="Transparent"
+           Size="300, 300">
+
+    <Border Stroke="#87CEFA"
+            StrokeThickness="4"
+            HorizontalOptions="Center">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="40,40,40,40" />
+        </Border.StrokeShape>
+
+        <Grid ColumnDefinitions="*, *" 
+              RowDefinitions="Auto, Auto, Auto, *">
+
+            <Label Text="Duplicate"
+                   FontAttributes="Bold"
+                   Grid.Row="0"
+                   Grid.ColumnSpan="2"
+                   HorizontalOptions="Center"
+                   Margin="20"
+                   FontSize="24" />
+
+            <Label x:Name="duplicate_table_prompt_display" 
+                   Margin="10"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="1"/>
+
+            <Label x:Name="duplicate_table_prompt2_display" 
+                   Margin="10"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="2"/>
+
+            <Button Text="Close"
+                    Margin="20"
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    WidthRequest="85"
+                    Clicked="Close_Popup" />
+        </Grid>
+    </Border>
+</mct:Popup>

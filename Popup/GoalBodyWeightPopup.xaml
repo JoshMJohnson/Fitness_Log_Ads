@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="Fitness_Log.Popup.GoalBodyWeightPopup"
+           VerticalOptions="Start"
+           HorizontalOptions="Center"
+           Color="Transparent"
+           Size="275, 415" >
+
+    <ScrollView MinimumHeightRequest="415">
+        <Border Stroke="#87CEFA"
+                StrokeThickness="4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40,40,40,40" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="*, *" 
+                  RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *">
+
+                <Label Text="Create Goal"
+                       FontAttributes="Bold"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       Margin="20"
+                       FontSize="24" />
+
+                <Label Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       x:Name="error_prompt"
+                       IsVisible="False"
+                       FontAttributes="Italic"
+                       TextColor="Red"
+                       FontSize="11"
+                       HorizontalOptions="Center" />
+
+                <Grid Grid.Row="2"
+                      Grid.ColumnSpan="2"
+                      Margin="10"
+                      RowDefinitions="*"
+                      ColumnDefinitions="Auto, *, Auto">
+
+                    <Label Text="Goal Name:"
+                           Grid.Column="0"
+                           VerticalOptions="Center"/>
+
+                    <Entry Grid.Row="1"
+                           Grid.Column="2"
+                           MaximumWidthRequest="135"
+                           MaxLength="25"
+                           VerticalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           x:Name="goal_name_entry"
+                           Placeholder="Goal Name" />
+                </Grid>
+
+                <Grid Grid.Row="3"
+                      Grid.ColumnSpan="2"
+                      Margin="10"
+                      RowDefinitions="*"
+                      ColumnDefinitions="Auto, *, Auto">
+
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           VerticalOptions="Center"
+                           Text="Weight (lbs):" />
+
+                    <Entry Keyboard="Numeric"
+                           x:Name="weight_entry"
+                           Grid.Row="1"
+                           Grid.Column="2"
+                           VerticalOptions="Center"
+                           MaxLength="5"
+                           HorizontalTextAlignment="Center"
+                           Placeholder="200" />
+                </Grid>
+
+                <Grid Grid.Row="4"
+                      Grid.ColumnSpan="2"
+                      RowDefinitions="*"
+                      ColumnDefinitions="Auto, *, Auto"
+                      x:Name="no_date_display" 
+                      Margin="10" >
+
+                    <Label Grid.Row="3"
+                           Grid.Column="0"
+                           VerticalOptions="Center"
+                           Text="Achieve By:" />
+
+                    <Label Grid.Row="3"
+                           Grid.Column="2"
+                           VerticalOptions="Center"
+                           Text="No Achieve Date" 
+                           FontAttributes="Italic"
+                           Margin="10" />
+                </Grid>
+
+                <Grid Grid.Row="4"
+                      Grid.ColumnSpan="2"
+                      Margin="8"
+                      x:Name="record_date_display"
+                      IsVisible="False">
+
+                    <Label Grid.Row="3"
+                           Grid.Column="0"
+                           Text="Achieve By:" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start" />
+
+                    <DatePicker Grid.Column="1"
+                                x:Name="weight_date"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center" />
+                </Grid>
+
+                <Grid Grid.ColumnSpan="2"
+                      Grid.Row="5"
+                      RowDefinitions="*"
+                      ColumnDefinitions="*, Auto, *">
+
+                    <Label Grid.Column="0"
+                           Text="No Date"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End" />
+
+                    <Switch Grid.Column="1"
+                            x:Name="date_included_toggle"                    
+                            Toggled="date_included_change"
+                            IsToggled="False"
+                            VerticalOptions="Center"
+                            Margin="10" />
+
+                    <Label Grid.Column="2"
+                           Text="Date"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start"/>
+                </Grid>
+
+                <Grid Grid.Row="6"
+                      Grid.ColumnSpan="2"
+                      Margin="10"
+                      ColumnDefinitions="*, *">
+
+                    <Button Text="Record"
+                            Grid.Column="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" 
+                            WidthRequest="100"
+                            Clicked="Submit_Goal" />
+
+                    <Button Text="Cancel"
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="100"
+                            Clicked="Cancel_Goal" />
+                </Grid>
+            </Grid>
+        </Border>
+    </ScrollView>
+</mct:Popup>
