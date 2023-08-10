@@ -1,7 +1,6 @@
 using CommunityToolkit.Maui.Views;
 using Fitness_Log.Popup;
 using Fitness_Log.Model;
-using AndroidX.ConstraintLayout.Core;
 
 namespace Fitness_Log;
 

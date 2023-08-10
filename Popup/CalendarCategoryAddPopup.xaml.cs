@@ -1,4 +1,3 @@
-using Android.OS;
 using Microsoft.Maui.Controls.Shapes;
 using Fitness_Log.Model;
 

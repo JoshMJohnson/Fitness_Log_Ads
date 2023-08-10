@@ -4,7 +4,7 @@ public partial class App : Application
 {
     public static RecordRepository RecordRepo { get; private set; }
 
-    public App()
+    public App(RecordRepository repo)
 	{
 		InitializeComponent();
 
