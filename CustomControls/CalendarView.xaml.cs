@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using WorkoutLog.Model;
+using Fitness_Log.Model;
 
 namespace Fitness_Log.CustomControls;
 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using WorkoutLog.Model;
+using Fitness_Log.Model;
 
 namespace Fitness_Log.Cells;
 

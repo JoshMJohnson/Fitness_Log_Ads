@@ -1,6 +1,6 @@
 using CommunityToolkit.Maui.Views;
-using WorkoutLog.Popup;
-using WorkoutLog.Model;
+using Fitness_Log.Popup;
+using Fitness_Log.Model;
 using CommunityToolkit.Maui.Converters;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;

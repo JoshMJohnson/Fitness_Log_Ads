@@ -1,9 +1,9 @@
 using CommunityToolkit.Maui.Views;
 using System;
 using System.Diagnostics;
-using WorkoutLog.Model;
-using WorkoutLog.CustomControls;
-using WorkoutLog.Popup;
+using Fitness_Log.Model;
+using Fitness_Log.CustomControls;
+using Fitness_Log.Popup;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Fitness_Log;

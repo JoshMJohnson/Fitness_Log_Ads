@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="Fitness_Log.Popup.BodyProgressionPopup"
+           VerticalOptions="Start"
+           HorizontalOptions="Center"
+           Color="Transparent"
+           Size="300, 600" >
+
+    <ScrollView>
+        <Border Stroke="#87CEFA"
+                StrokeThickness="4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40,40,40,40" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="*, *" 
+                  RowDefinitions="Auto, Auto, Auto, Auto, *, Auto">
+
+                <Label Text="Save Progression"
+                       FontAttributes="Bold"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalOptions="Center"
+                       Margin="20"
+                       FontSize="24" />
+
+                <Label Grid.Row="1"
+                       Grid.ColumnSpan="2"
+                       Text="Choose an image to save as progression"
+                       x:Name="error_prompt"
+                       IsVisible="False"
+                       FontAttributes="Italic"
+                       TextColor="Red"
+                       FontSize="11"
+                       HorizontalOptions="Center" />
+
+                <Grid Grid.Row="2"
+                      Grid.ColumnSpan="2"
+                      ColumnDefinitions="Auto, *, Auto"
+                      Margin="10" >
+
+                    <Label Grid.Row="3"
+                           Grid.Column="0"
+                           Text="Date:" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start" />
+
+                    <DatePicker Grid.Column="1"
+                                x:Name="image_date_selected_display"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center" />
+                </Grid>
+
+                <Button Grid.ColumnSpan="2"
+                        Grid.Row="3"
+                        Margin="5"
+                        Text="Load Image"
+                        Clicked="Load_Image"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                <Image x:Name="load_progression_preview"
+                       Margin="5"
+                       HeightRequest="300"
+                       Aspect="Fill"
+                       Grid.Row="4"
+                       Grid.ColumnSpan="2" />
+
+                <Grid Grid.Row="5"
+                      Grid.ColumnSpan="2"
+                      Margin="15"
+                      ColumnDefinitions="*, *">
+
+                    <Button Text="Record"
+                            Grid.Column="0"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" 
+                            WidthRequest="100"
+                            Clicked="Save_Progression" />
+
+                    <Button Text="Cancel"
+                            Grid.Column="1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            WidthRequest="100"
+                            Clicked="Cancel_Progression" />
+                </Grid>
+            </Grid>
+        </Border>
+    </ScrollView>
+</mct:Popup>

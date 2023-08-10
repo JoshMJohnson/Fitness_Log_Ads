@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+           xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+           x:Class="Fitness_Log.Popup.BodyProgressionDisplayPopup"
+           VerticalOptions="Start"
+           HorizontalOptions="Center"
+           Color="Transparent"
+           Size="300, 515">
+
+    <ScrollView MinimumHeightRequest="500">
+        <Border Stroke="#87CEFA"
+                StrokeThickness="4">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40,40,40,40" />
+            </Border.StrokeShape>
+
+            <Grid ColumnDefinitions="*, *" 
+                  RowDefinitions="Auto, Auto, *, Auto">
+
+                <Label Text="Progression"
+                       FontAttributes="Italic"
+                       Grid.Row="0"
+                       Grid.ColumnSpan="2"
+                       HorizontalOptions="Start"
+                       LineHeight="100"
+                       VerticalTextAlignment="Center"
+                       Margin="10"
+                       FontSize="24" />
+
+                <Button Grid.Row="0"
+                        Grid.Column="1"
+                        Clicked="Close_Progression_Popup"
+                        Margin="20"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        HorizontalOptions="End"
+                        TextColor="white"
+                        Text="X"/>
+
+                <Grid Grid.Row="1"
+                      Grid.ColumnSpan="2"
+                      ColumnDefinitions="Auto, *, Auto"
+                      Margin="10" >
+
+                    <Label Grid.Row="3"
+                           Grid.Column="0"
+                           Text="Date:" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start" />
+
+                    <Label Grid.Column="1"
+                           x:Name="image_date_selected_display"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <Image x:Name="load_progression_view"
+                       Margin="5"
+                       HeightRequest="300"
+                       Aspect="Fill"
+                       Grid.Row="2"
+                       Grid.ColumnSpan="2" />
+
+                <Button Text="Delete"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Margin="15"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" 
+                        WidthRequest="100"
+                        Clicked="Remove_Body_Progression" />
+            </Grid>
+        </Border>
+    </ScrollView>
+</mct:Popup>

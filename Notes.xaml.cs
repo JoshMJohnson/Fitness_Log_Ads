@@ -1,6 +1,6 @@
 using CommunityToolkit.Maui.Views;
-using WorkoutLog.Popup;
-using WorkoutLog.Model;
+using Fitness_Log.Popup;
+using Fitness_Log.Model;
 using System.Windows.Input;
 using static Android.Provider.ContactsContract.CommonDataKinds;
 

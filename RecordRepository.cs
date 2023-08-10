@@ -1,5 +1,5 @@
 using SQLite;
-using WorkoutLog.Model;
+using Fitness_Log.Model;
 
 namespace Fitness_Log;
 
