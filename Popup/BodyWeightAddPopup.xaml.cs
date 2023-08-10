@@ -1,6 +1,7 @@
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Xml.Linq;
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -11,6 +12,11 @@ public partial class BodyWeightAddPopup
         InitializeComponent();
 
         record_date.MaximumDate = DateTime.Now;
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
     }
 
     /* records body weight entry */
@@ -37,7 +43,8 @@ public partial class BodyWeightAddPopup
             }
             else /* else; valid entry; not a duplicate */
             {
-                Close(true);
+                Show_Intestitial();
+                Close(true);                
             }
         }
         else /* if weight field is empty */
@@ -51,5 +58,11 @@ public partial class BodyWeightAddPopup
     private void Cancel_Body_Weight(object sender, EventArgs e)
     {
         Close();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/2221425616");
     }
 }

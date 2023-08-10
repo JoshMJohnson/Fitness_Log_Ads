@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -10,6 +11,11 @@ public partial class PersonalRecordAddPopup
 
         time_display.IsVisible = false;
         record_date.MaximumDate = DateTime.Now;
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
     }
 
     /* creates an exercise along with the PR */
@@ -87,6 +93,7 @@ public partial class PersonalRecordAddPopup
                         }
                         else /* else; valid entry; not a duplicate */
                         {
+                            Show_Intestitial();
                             Close(true);
                         }
                     }
@@ -116,6 +123,7 @@ public partial class PersonalRecordAddPopup
                         }
                         else /* else; valid entry; not a duplicate */
                         {
+                            Show_Intestitial();
                             Close(true);
                         }
                     }
@@ -137,6 +145,12 @@ public partial class PersonalRecordAddPopup
             error_prompt.Text = "PR exercise name cannot be empty";
             error_prompt.IsVisible = true;
         }
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/2221425616");
     }
 
     /* closes popup for creating an exercise */

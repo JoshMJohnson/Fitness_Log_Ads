@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -8,6 +9,11 @@ public partial class GoalBodyWeightPopup
     {
         InitializeComponent();
         weight_date.MinimumDate = DateTime.Now;
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
     }
 
     /* creates an exercise along with the PR */
@@ -58,6 +64,7 @@ public partial class GoalBodyWeightPopup
                     }
                     else /* else; valid entry; not a duplicate */
                     {
+                        Show_Intestitial();
                         Close(true);
                     }
                 }
@@ -78,6 +85,12 @@ public partial class GoalBodyWeightPopup
             error_prompt.Text = "Goal name cannot be empty";
             error_prompt.IsVisible = true;
         }
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/2221425616");
     }
 
     /* closes popup for creating an exercise */

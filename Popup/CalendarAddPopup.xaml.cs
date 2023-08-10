@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -8,6 +9,11 @@ public partial class CalendarAddPopup
     {
         InitializeComponent();
         Get_Exercise_Categories();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
     }
 
     /* processes a submission to record an exercise performed */
@@ -17,7 +23,14 @@ public partial class CalendarAddPopup
         DateTime date = record_date.Date;
 
         await App.RecordRepo.Add_Calendar_Entry(category_name, date);
+        Show_Intestitial();
         Close();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/2221425616");
     }
 
     /* closes popup for adding an exercise */

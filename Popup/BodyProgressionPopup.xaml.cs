@@ -1,5 +1,6 @@
 using Microsoft.Maui.Storage;
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -12,6 +13,11 @@ public partial class BodyProgressionPopup
     public BodyProgressionPopup()
     {
         InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
     }
 
     /* closes popup for adding body progression */
@@ -49,8 +55,9 @@ public partial class BodyProgressionPopup
                 {
                     Close(false);
                 }
-                else
+                else /* else; saved progression to database */
                 {
+                    Show_Intestitial();
                     Close(true);
                 }
             }
@@ -59,6 +66,12 @@ public partial class BodyProgressionPopup
                 Close(false);
             }
         }
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/2221425616");
     }
 
     /* load local image from device */

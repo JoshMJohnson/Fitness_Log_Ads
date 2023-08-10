@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -16,6 +17,11 @@ public partial class NotesAddPopup
 
         current_char_value_display.Text = current_char_value.ToString();
         max_char_value_display.Text = max_char_value.ToString();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
     }
 
     /* refreshes the current char value of the note text box */
@@ -57,6 +63,7 @@ public partial class NotesAddPopup
                 }
                 else /* else; valid entry; not a duplicate */
                 {
+                    Show_Intestitial();
                     Close(true);
                 }
             }
@@ -71,6 +78,12 @@ public partial class NotesAddPopup
             error_prompt.Text = "Note title cannot be empty";
             error_prompt.IsVisible = true;
         }
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/2221425616");
     }
 
     /* closes the note popup */
