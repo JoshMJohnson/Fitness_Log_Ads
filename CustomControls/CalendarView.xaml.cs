@@ -6,11 +6,101 @@ namespace Fitness_Log.CustomControls;
 
 public partial class CalendarView : StackLayout
 {
+    #region BinableProperty
+
+    /* updating data after changing month displayed */
+    public static readonly BindableProperty displayed_month_property = BindableProperty.Create(
+        nameof(_tempDate),
+        typeof(DateTime),
+        declaringType: typeof(CalendarView),
+        defaultBindingMode: BindingMode.TwoWay,
+        defaultValue: DateTime.Now,
+        propertyChanged: Selected_Date_Property_Changed);
+
+    /* updating data after selecting a new date */
+    public static readonly BindableProperty selected_date_property = BindableProperty.Create(
+        nameof(selected_date),
+        typeof(DateTime),
+        declaringType: typeof(CalendarView),
+        defaultBindingMode: BindingMode.TwoWay,
+        defaultValue: DateTime.Now,
+        propertyChanged: Selected_Date_Property_Changed);
+
+    /* executes when a date is selected */
+    private static void Selected_Date_Property_Changed(BindableObject bindable, object oldValue, object newValue)
+    {
+        var controls = (CalendarView)bindable;
+
+        if (newValue != null)
+        {
+            var new_date = (DateTime)newValue;
+
+            if (controls._tempDate.Month == new_date.Month && controls._tempDate.Year == new_date.Year)
+            {
+                var current_date = controls.dates.Where(d => d.date == new_date.Date).FirstOrDefault();
+
+                if (current_date != null)
+                {
+                    controls.dates.ToList().ForEach(d => d.is_current_date = false);
+                    current_date.is_current_date = true;
+                }
+            }
+            else
+            {
+                controls.Bind_Dates(new_date);
+            }
+        }
+    }
+
+    /* displays current month displayed for workout calendar */
+    public DateTime displaying_month
+    {
+        get => (DateTime)GetValue(displayed_month_property);
+        set => SetValue(displayed_month_property, value);
+    }
+
+    public static readonly BindableProperty displaying_month_command_property = BindableProperty.Create(
+        nameof(displaying_month_command),
+        typeof(ICommand),
+        declaringType: typeof(CalendarView));
+
+    public ICommand displaying_month_command
+    {
+        get => (ICommand)GetValue(displaying_month_command_property);
+        set => SetValue(displaying_month_command_property, value);
+    }
+
+    /* contains data for the current date selected */
+    public DateTime selected_date
+    {
+        get => (DateTime)GetValue(selected_date_property);
+        set => SetValue(selected_date_property, value);
+    }
+
+    public static readonly BindableProperty selected_date_command_property = BindableProperty.Create(
+        nameof(selected_date_command),
+        typeof(ICommand),
+        declaringType: typeof(CalendarView));
+
+    public ICommand selected_date_command
+    {
+        get => (ICommand)GetValue(selected_date_command_property);
+        set => SetValue(selected_date_command_property, value);
+    }
+
+    public event EventHandler<DateTime> on_date_selected;
+    public DateTime _tempDate
+    {
+        get => (DateTime)GetValue(displayed_month_property);
+        set => SetValue(displayed_month_property, value);
+    }
+    #endregion
+
     public ObservableCollection<CalendarDay> dates { get; set; } = new ObservableCollection<CalendarDay>();
 
     public CalendarView()
-	{
-		InitializeComponent();
+    {
+        InitializeComponent();
         Bind_Dates(DateTime.Now);
     }
 
