@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -9,6 +10,12 @@ public partial class GoalPREditPopup
     public GoalPREditPopup(string goal_name)
     {
         InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         Gather_Data(goal_name);
 
         achieve_by_date.MinimumDate = DateTime.Now;
@@ -118,7 +125,7 @@ public partial class GoalPREditPopup
                 }
 
                 await App.RecordRepo.Edit_Goal_PR(name, date, has_desired, false, -1, hr_update, min_update, sec_update);
-
+                Show_Intestitial();
                 error_prompt.IsVisible = false;
                 Close();
             }
@@ -138,7 +145,7 @@ public partial class GoalPREditPopup
 
                 double weight_update = double.Parse(weight_update_string);
                 await App.RecordRepo.Edit_Goal_PR(name, date, has_desired, true, weight_update, -1, -1, -1);
-
+                Show_Intestitial();
                 error_prompt.IsVisible = false;
                 Close();
             }
@@ -148,6 +155,12 @@ public partial class GoalPREditPopup
                 error_prompt.IsVisible = true;
             }
         }
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/3398775911");
     }
 
     /* close the popup window */

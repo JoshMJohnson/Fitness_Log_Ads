@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -9,6 +10,12 @@ public partial class BodyWeightUpdatePopup
     public BodyWeightUpdatePopup(DateTime entry_date)
     {
         InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         View_Entry(entry_date);
     }
 
@@ -37,6 +44,7 @@ public partial class BodyWeightUpdatePopup
             double weight_update = double.Parse(weight_update_string);
 
             await App.RecordRepo.Edit_Body_Weight(date, weight_update);
+            Show_Intestitial();
 
             error_prompt.IsVisible = false;
             Close();
@@ -53,6 +61,7 @@ public partial class BodyWeightUpdatePopup
     {
         DateTime entry_date = current_entry.date;
         await App.RecordRepo.Remove_Body_Weight(entry_date);
+        Show_Intestitial();
         Close();
     }
 
@@ -60,5 +69,11 @@ public partial class BodyWeightUpdatePopup
     private void Close_Edit_Popup(object sender, EventArgs e)
     {
         Close();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/3398775911");
     }
 }

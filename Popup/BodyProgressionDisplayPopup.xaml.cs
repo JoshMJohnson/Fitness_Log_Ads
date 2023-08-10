@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -9,6 +10,12 @@ public partial class BodyProgressionDisplayPopup
     public BodyProgressionDisplayPopup(string image_name)
     {
         InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         View_Progression_Data(image_name);
     }
 
@@ -32,6 +39,14 @@ public partial class BodyProgressionDisplayPopup
     {
         string progression_image_name = current_progression.image_full_path;
         await App.RecordRepo.Remove_Progression(progression_image_name);
+
+        Show_Intestitial();
         Close();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/3398775911");
     }
 }

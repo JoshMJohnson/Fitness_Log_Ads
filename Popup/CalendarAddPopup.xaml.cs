@@ -8,12 +8,13 @@ public partial class CalendarAddPopup
     public CalendarAddPopup()
     {
         InitializeComponent();
-        Get_Exercise_Categories();
 
         CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
         {
             CrossMauiMTAdmob.Current.ShowInterstitial();
         };
+
+        Get_Exercise_Categories();        
     }
 
     /* processes a submission to record an exercise performed */

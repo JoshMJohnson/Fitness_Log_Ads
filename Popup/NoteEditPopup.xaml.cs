@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -11,6 +12,11 @@ public partial class NoteEditPopup
     public NoteEditPopup(string note_name)
     {
         InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
 
         current_char_value = 0;
         max_char_value = 300;
@@ -58,7 +64,7 @@ public partial class NoteEditPopup
                 }
 
                 await App.RecordRepo.Edit_Note(name, note_content);
-
+                Show_Intestitial();
                 error_prompt.IsVisible = false;
                 Close();
             }
@@ -80,7 +86,14 @@ public partial class NoteEditPopup
     {
         string note_name = current_note.name;
         await App.RecordRepo.Remove_Note(note_name);
+        Show_Intestitial();
         Close();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/3398775911");
     }
 
     /* closes the note popup */

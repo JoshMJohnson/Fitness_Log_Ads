@@ -1,4 +1,5 @@
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log.Popup;
 
@@ -9,6 +10,12 @@ public partial class UpdatePR
     public UpdatePR(string pr_name)
     {
         InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         Get_PR_Data(pr_name);
     }
 
@@ -100,7 +107,7 @@ public partial class UpdatePR
                 }
 
                 await App.RecordRepo.Update_PR(name, date, -1, hr_update, min_update, sec_update);
-
+                Show_Intestitial();
                 error_prompt.IsVisible = false;
                 Close();
             }
@@ -117,10 +124,10 @@ public partial class UpdatePR
             if (weight_update_string != null && weight_update_string.Length != 0) /* if weight field is not empty */
             {
                 weight_update_string = weight_update_string.ToString();
-
                 double weight_update = double.Parse(weight_update_string);
-                await App.RecordRepo.Update_PR(name, date, weight_update, -1, -1, -1);
 
+                await App.RecordRepo.Update_PR(name, date, weight_update, -1, -1, -1);
+                Show_Intestitial();
                 error_prompt.IsVisible = false;
                 Close();
             }
@@ -130,6 +137,12 @@ public partial class UpdatePR
                 error_prompt.IsVisible = true;
             }
         }
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/3398775911");
     }
 
     /* closes popup for creating an exercise */

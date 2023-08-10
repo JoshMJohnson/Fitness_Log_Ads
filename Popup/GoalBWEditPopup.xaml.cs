@@ -1,5 +1,6 @@
 using System;
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Fitness_Log.Popup;
@@ -11,6 +12,12 @@ public partial class GoalBWEditPopup
     public GoalBWEditPopup(string goal_name)
     {
         InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         Gather_Data(goal_name);
 
         weight_date.MinimumDate = DateTime.Now;
@@ -65,7 +72,7 @@ public partial class GoalBWEditPopup
             }
 
             await App.RecordRepo.Edit_Body_Weight_Goal(goal_name, date, has_desired, weight_update);
-
+            Show_Intestitial();
             error_prompt.IsVisible = false;
             Close();
         }
@@ -74,6 +81,12 @@ public partial class GoalBWEditPopup
             error_prompt.Text = "Goal weight value cannot be empty";
             error_prompt.IsVisible = true;
         }
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/3398775911");
     }
 
     /* close the popup window */
