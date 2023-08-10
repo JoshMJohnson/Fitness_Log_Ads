@@ -66,7 +66,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <controls:MTAdView x:Name="myAds"    
+        <controls:MTAdView x:Name="banner_ad"    
                            AdsId="ca-app-pub-6232744288972049/9228072695"
                            Grid.Row="1"/>
     </Grid>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              xmlns:model="clr-namespace:Fitness_Log.Model"
              xmlns:cells="clr-namespace:Fitness_Log.Cells"
              x:Class="Fitness_Log.PersonalRecords"
@@ -719,12 +720,17 @@
     </ContentPage.Resources>
 
     <Grid x:Name="pr_layout"
-          RowDefinitions="*"
+          RowDefinitions="*, Auto"
           ColumnDefinitions="*">
 
         <CollectionView x:Name="pr_display"
+                        Grid.Row="0"
                         HorizontalOptions="Center"
                         VerticalOptions="Start"
                         ItemTemplate="{StaticResource PRTypeSelector}" />
+
+        <controls:MTAdView x:Name="banner_ad"    
+                           AdsId="ca-app-pub-6232744288972049/9228072695"
+                           Grid.Row="1"/>
     </Grid>
 </ContentPage>

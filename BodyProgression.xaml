@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Plugin.MauiMTAdmob.Controls;assembly=Plugin.MauiMTAdmob"
              xmlns:model="clr-namespace:Fitness_Log.Model"
              x:Class="Fitness_Log.BodyProgression"
              Title="Body Progression">
@@ -11,10 +12,11 @@
     </ContentPage.ToolbarItems>
 
     <Grid x:Name="progression_layout"
-          RowDefinitions="*"
+          RowDefinitions="*, Auto"
           ColumnDefinitions="*">
 
         <CollectionView x:Name="progression_list_display"
+                        Grid.Row="0"
                         VerticalOptions="Start"
                         SelectionMode="Single"
                         SelectionChanged="View_Progression">
@@ -49,5 +51,9 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <controls:MTAdView x:Name="banner_ad"    
+                           AdsId="ca-app-pub-6232744288972049/9228072695"
+                           Grid.Row="1"/>
     </Grid>
 </ContentPage>
