@@ -5,6 +5,7 @@ using CommunityToolkit.Maui.Converters;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Maui.Controls;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log;
 
@@ -15,6 +16,14 @@ public partial class PersonalRecords : ContentPage
     public PersonalRecords()
 	{
 		InitializeComponent();
+
+        InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         Empty_PR_Display();
         Refresh_PR_List();
     }
@@ -46,7 +55,14 @@ public partial class PersonalRecords : ContentPage
         string pr_name = remove_pr.BindingContext.ToString();
 
         await App.RecordRepo.Remove_PR(pr_name);
+        Show_Intestitial();
         Refresh_PR_List();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/4461146967");
     }
 
     /* swipe edit pr */

@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Views;
 using Fitness_Log.Popup;
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log;
 
@@ -11,6 +12,12 @@ public partial class GoalsBodyWeight : ContentPage
     public GoalsBodyWeight()
 	{
 		InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         Empty_Body_Weight_Goals_Display();
         Refresh_BW_Goal_List();
     }
@@ -42,7 +49,14 @@ public partial class GoalsBodyWeight : ContentPage
         string goal_name = remove_bw_goal.BindingContext.ToString();
 
         await App.RecordRepo.Remove_Goal_Body_Weight(goal_name);
+        Show_Intestitial();
         Refresh_BW_Goal_List();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/4461146967");
     }
 
     /* swipe edit BW goal */

@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui.Views;
 using Fitness_Log.Popup;
 using Fitness_Log.Model;
+using Plugin.MauiMTAdmob;
 
 namespace Fitness_Log;
 
@@ -11,6 +12,12 @@ public partial class GoalsPR : ContentPage
     public GoalsPR()
 	{
 		InitializeComponent();
+
+        CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
+        {
+            CrossMauiMTAdmob.Current.ShowInterstitial();
+        };
+
         Empty_PR_Goal_List_Display();
         Refresh_PR_Goal_List();
     }
@@ -41,7 +48,14 @@ public partial class GoalsPR : ContentPage
         string pr_name = remove_pr.BindingContext.ToString();
 
         await App.RecordRepo.Remove_Goal_PR(pr_name);
+        Show_Intestitial();
         Refresh_PR_Goal_List();
+    }
+
+    /* shows intestitial video ad */
+    private void Show_Intestitial()
+    {
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/4461146967");
     }
 
     /* swipe edit pr goal */
