@@ -150,7 +150,7 @@ public partial class PersonalRecordAddPopup
     /* shows intestitial video ad */
     private void Show_Intestitial()
     {
-        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/2221425616");
+        CrossMauiMTAdmob.Current.LoadInterstitial("ca-app-pub-6232744288972049/4461146967");
     }
 
     /* closes popup for creating an exercise */
