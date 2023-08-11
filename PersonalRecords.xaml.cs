@@ -15,8 +15,6 @@ public partial class PersonalRecords : ContentPage
 
     public PersonalRecords()
 	{
-		InitializeComponent();
-
         InitializeComponent();
 
         CrossMauiMTAdmob.Current.OnInterstitialLoaded += (s, args) =>
