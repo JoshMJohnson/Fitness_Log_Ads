@@ -30,7 +30,13 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
-	
+	<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+		<AndroidKeyStore>True</AndroidKeyStore>
+		<AndroidSigningKeyStore>..\key.keystore</AndroidSigningKeyStore>
+		<AndroidSigningStorePass>CodingMaster</AndroidSigningStorePass>
+		<AndroidSingingKeyAlias>FitnessLogAlias</AndroidSingingKeyAlias>
+		<AndroidSigningKeyPass>CodingMaster</AndroidSigningKeyPass>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
