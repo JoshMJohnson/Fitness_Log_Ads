@@ -150,7 +150,7 @@ public partial class ChartView : Grid
         {
             if (highest_body_weight_value == lowest_body_weight_value) /* if only one entry */
             {
-                y_axis_6.Text = entries[0].weight.ToString();
+                y_axis_6.Text = entries[0].weight.ToString("#.#");
                 y_axis_5.Text = "----";
                 y_axis_4.Text = "----";
                 y_axis_3.Text = "----";
@@ -173,12 +173,12 @@ public partial class ChartView : Grid
                 y_value3 = Math.Round(y_value3, 2);
                 y_value2 = Math.Round(y_value2, 2);
 
-                y_axis_6.Text = highest_body_weight_value.ToString();
-                y_axis_5.Text = y_value5.ToString();
-                y_axis_4.Text = y_value4.ToString();
-                y_axis_3.Text = y_value3.ToString();
-                y_axis_2.Text = y_value2.ToString();
-                y_axis_1.Text = lowest_body_weight_value.ToString();
+                y_axis_6.Text = highest_body_weight_value.ToString("#.#");
+                y_axis_5.Text = y_value5.ToString("#.#");
+                y_axis_4.Text = y_value4.ToString("#.#");
+                y_axis_3.Text = y_value3.ToString("#.#");
+                y_axis_2.Text = y_value2.ToString("#.#");
+                y_axis_1.Text = lowest_body_weight_value.ToString("#.#");
 
                 double half_gap = total_weight_change_gap / 2.0;
 

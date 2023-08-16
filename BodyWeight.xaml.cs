@@ -63,9 +63,9 @@ public partial class BodyWeight : ContentPage
         {
             double most_recent_weight_entry = entries[0].weight;
             double second_most_recent_weight_entry = entries[1].weight;
-            double weight_change = most_recent_weight_entry - second_most_recent_weight_entry;
+            double weight_change = Math.Round(most_recent_weight_entry - second_most_recent_weight_entry, 2);
 
-            change_weight_display.Text = weight_change.ToString();
+            change_weight_display.Text = weight_change.ToString("#.#");
         }
 
         /* 'Closest Goal' cell */
@@ -124,8 +124,8 @@ public partial class BodyWeight : ContentPage
 
         if (one_entry_week && two_entries_week) /* if at least 2 entries with 7 days */
         {
-            double weight_diff = most_recent_entry_week.weight - furthest_entry_within_week.weight;
-            week_change_display.Text = weight_diff.ToString();
+            double weight_diff = Math.Round(most_recent_entry_week.weight - furthest_entry_within_week.weight, 2);
+            week_change_display.Text = weight_diff.ToString("#.#");
         }
         else /* else; only 1 or 2 entries with 7 days */
         {
@@ -163,8 +163,8 @@ public partial class BodyWeight : ContentPage
 
         if (one_entry_month && two_entries_month) /* if at least 2 entries with 7 days */
         {
-            double weight_diff = most_recent_entry_month.weight - furthest_entry_within_month.weight;
-            month_change_display.Text = weight_diff.ToString();
+            double weight_diff = Math.Round(most_recent_entry_month.weight - furthest_entry_within_month.weight, 2);
+            month_change_display.Text = weight_diff.ToString("#.#");
         }
         else /* else; only 1 or 2 entries with 7 days */
         {
@@ -182,9 +182,9 @@ public partial class BodyWeight : ContentPage
         {
             double oldest_recorded_weight = entries[num_entries - 1].weight;
             double newest_recorded_weight = entries[0].weight;
-            double diff_weight = newest_recorded_weight - oldest_recorded_weight;
+            double diff_weight = Math.Round(newest_recorded_weight - oldest_recorded_weight, 2);
 
-            total_change_display.Text = diff_weight.ToString();
+            total_change_display.Text = diff_weight.ToString("#.#");
         }
     }
 
