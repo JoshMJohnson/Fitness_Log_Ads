@@ -6,7 +6,7 @@
            VerticalOptions="Start"
            HorizontalOptions="Center"
            Color="Transparent"
-           Size="250, 295">
+           Size="275, 295">
 
     <Border Stroke="#87CEFA"
             StrokeThickness="4"
@@ -93,14 +93,14 @@
                         Grid.Column="0"
                         HorizontalOptions="Center"
                         VerticalOptions="Center" 
-                        WidthRequest="75"
+                        WidthRequest="100"
                         Clicked="Edit_Body_Weight_Entry" />
 
                 <Button Text="Delete"
                         Grid.Column="1"
                         HorizontalOptions="Center"
                         VerticalOptions="Center"
-                        WidthRequest="75"
+                        WidthRequest="100"
                         Clicked="Delete_Body_Weight_Entry" />
             </Grid>
         </Grid>

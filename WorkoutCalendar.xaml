@@ -53,6 +53,7 @@
                                 <Label Text="{Binding name}"
                                        FontAttributes="Italic"
                                        Padding="5"
+                                       MinimumWidthRequest="15"
                                        HorizontalOptions="Center" />
 
                             </DataTemplate>
@@ -68,20 +69,20 @@
 
                 <Button Text="Create Category"
                         Grid.Row="0"
-                        Margin="4"
-                        CornerRadius="100"
+                        Margin="10"
+                        CornerRadius="45"
                         LineBreakMode="WordWrap"
-                        WidthRequest="100"
-                        HeightRequest="100"
+                        WidthRequest="125"
+                        HeightRequest="75"
                         Clicked="Create_Category" />
 
                 <Button Text="Delete Category"
                         Grid.Row="1"
-                        Margin="-2"
+                        Margin="10"
                         CornerRadius="100"
                         LineBreakMode="WordWrap"
-                        WidthRequest="100"
-                        HeightRequest="100"
+                        WidthRequest="125"
+                        HeightRequest="75"
                         Clicked="Remove_Category" />
             </Grid>
 
@@ -106,6 +107,7 @@
                                 <Label Text="{Binding calendar_category_name}" 
                                        Margin="5"
                                        FontAttributes="Italic"
+                                       MinimumWidthRequest="10"
                                        FontSize="16"/>
                             </HorizontalStackLayout>
                         </DataTemplate>

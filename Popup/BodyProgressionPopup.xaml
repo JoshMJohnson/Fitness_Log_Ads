@@ -58,6 +58,7 @@
                         Grid.Row="3"
                         Margin="5"
                         Text="Load Image"
+                        WidthRequest="125"
                         Clicked="Load_Image"
                         HorizontalOptions="Center"
                         VerticalOptions="Center" />
@@ -71,7 +72,7 @@
 
                 <Grid Grid.Row="5"
                       Grid.ColumnSpan="2"
-                      Margin="15"
+                      Margin="20"
                       ColumnDefinitions="*, *">
 
                     <Button Text="Record"
@@ -79,6 +80,7 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center" 
                             WidthRequest="100"
+                            Padding="5"
                             Clicked="Save_Progression" />
 
                     <Button Text="Cancel"
@@ -86,6 +88,7 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
                             WidthRequest="100"
+                            Padding="5"
                             Clicked="Cancel_Progression" />
                 </Grid>
             </Grid>
