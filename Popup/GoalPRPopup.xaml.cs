@@ -102,7 +102,16 @@ public partial class GoalPRPopup
                         }
                         else /* else; valid entry; not a duplicate */
                         {
-                            Show_Intestitial();
+                            /* only displays ads 1/3 of the time */
+                            int adCounter = Preferences.Get("AdCounter", 0);
+                            adCounter++;
+                            Preferences.Set("AdCounter", adCounter);
+
+                            if (adCounter % 3 == 0)
+                            {
+                                Show_Intestitial();
+                            }
+
                             Close(true);
                         }
                     }
@@ -134,7 +143,16 @@ public partial class GoalPRPopup
                         }
                         else /* else; valid entry; not a duplicate */
                         {
-                            Show_Intestitial();
+                            /* only displays ads 1/3 of the time */
+                            int adCounter = Preferences.Get("AdCounter", 0);
+                            adCounter++;
+                            Preferences.Set("AdCounter", adCounter);
+
+                            if (adCounter % 3 == 0)
+                            {
+                                Show_Intestitial();
+                            }
+
                             Close(true);
                         }
                     }

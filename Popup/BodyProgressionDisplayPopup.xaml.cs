@@ -40,7 +40,16 @@ public partial class BodyProgressionDisplayPopup
         string progression_image_name = current_progression.image_full_path;
         await App.RecordRepo.Remove_Progression(progression_image_name);
 
-        Show_Intestitial();
+        /* only displays ads 1/3 of the time */
+        int adCounter = Preferences.Get("AdCounter", 0);
+        adCounter++;
+        Preferences.Set("AdCounter", adCounter);
+
+        if (adCounter % 3 == 0)
+        {
+            Show_Intestitial();
+        }
+        
         Close();
     }
 

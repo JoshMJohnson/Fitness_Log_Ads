@@ -24,7 +24,17 @@ public partial class CalendarAddPopup
         DateTime date = record_date.Date;
 
         await App.RecordRepo.Add_Calendar_Entry(category_name, date);
-        Show_Intestitial();
+
+        /* only displays ads 1/3 of the time */
+        int adCounter = Preferences.Get("AdCounter", 0);
+        adCounter++;
+        Preferences.Set("AdCounter", adCounter);
+
+        if (adCounter % 3 == 0)
+        {
+            Show_Intestitial();
+        }
+
         Close();
     }
 

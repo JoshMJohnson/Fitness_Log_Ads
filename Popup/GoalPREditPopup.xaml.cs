@@ -125,7 +125,17 @@ public partial class GoalPREditPopup
                 }
 
                 await App.RecordRepo.Edit_Goal_PR(name, date, has_desired, false, -1, hr_update, min_update, sec_update);
-                Show_Intestitial();
+
+                /* only displays ads 1/3 of the time */
+                int adCounter = Preferences.Get("AdCounter", 0);
+                adCounter++;
+                Preferences.Set("AdCounter", adCounter);
+
+                if (adCounter % 3 == 0)
+                {
+                    Show_Intestitial();
+                }
+
                 error_prompt.IsVisible = false;
                 Close();
             }
@@ -145,7 +155,17 @@ public partial class GoalPREditPopup
 
                 double weight_update = double.Parse(weight_update_string);
                 await App.RecordRepo.Edit_Goal_PR(name, date, has_desired, true, weight_update, -1, -1, -1);
-                Show_Intestitial();
+
+                /* only displays ads 1/3 of the time */
+                int adCounter = Preferences.Get("AdCounter", 0);
+                adCounter++;
+                Preferences.Set("AdCounter", adCounter);
+
+                if (adCounter % 3 == 0)
+                {
+                    Show_Intestitial();
+                }
+
                 error_prompt.IsVisible = false;
                 Close();
             }

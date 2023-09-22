@@ -44,7 +44,16 @@ public partial class BodyWeightUpdatePopup
             double weight_update = double.Parse(weight_update_string);
 
             await App.RecordRepo.Edit_Body_Weight(date, weight_update);
-            Show_Intestitial();
+
+            /* only displays ads 1/3 of the time */
+            int adCounter = Preferences.Get("AdCounter", 0);
+            adCounter++;
+            Preferences.Set("AdCounter", adCounter);
+
+            if (adCounter % 3 == 0)
+            {
+                Show_Intestitial();
+            }
 
             error_prompt.IsVisible = false;
             Close();
@@ -61,7 +70,17 @@ public partial class BodyWeightUpdatePopup
     {
         DateTime entry_date = current_entry.date;
         await App.RecordRepo.Remove_Body_Weight(entry_date);
-        Show_Intestitial();
+
+        /* only displays ads 1/3 of the time */
+        int adCounter = Preferences.Get("AdCounter", 0);
+        adCounter++;
+        Preferences.Set("AdCounter", adCounter);
+
+        if (adCounter % 3 == 0)
+        {
+            Show_Intestitial();
+        }
+
         Close();
     }
 

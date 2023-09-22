@@ -38,7 +38,17 @@ public partial class NoteDisplayPopup
     {
         string note_name = current_note.name;
         await App.RecordRepo.Remove_Note(note_name);
-        Show_Intestitial();
+
+        /* only displays ads 1/3 of the time */
+        int adCounter = Preferences.Get("AdCounter", 0);
+        adCounter++;
+        Preferences.Set("AdCounter", adCounter);
+
+        if (adCounter % 3 == 0)
+        {
+            Show_Intestitial();
+        }
+
         Close();
     }
 

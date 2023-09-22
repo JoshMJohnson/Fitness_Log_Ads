@@ -72,7 +72,17 @@ public partial class GoalBWEditPopup
             }
 
             await App.RecordRepo.Edit_Body_Weight_Goal(goal_name, date, has_desired, weight_update);
-            Show_Intestitial();
+
+            /* only displays ads 1/3 of the time */
+            int adCounter = Preferences.Get("AdCounter", 0);
+            adCounter++;
+            Preferences.Set("AdCounter", adCounter);
+
+            if (adCounter % 3 == 0)
+            {
+                Show_Intestitial();
+            }
+
             error_prompt.IsVisible = false;
             Close();
         }
