@@ -115,7 +115,6 @@
 
                                 <Label Text="{Binding calendar_category_name}" 
                                        Margin="5"
-                                       FontAttributes="Italic"
                                        MinimumWidthRequest="10"
                                        FontSize="16"/>
                             </HorizontalStackLayout>
