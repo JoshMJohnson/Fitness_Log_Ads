@@ -45,20 +45,29 @@
                       ColumnDefinitions="*"
                       Grid.Row="1">
 
-                    <CollectionView x:Name="workout_category_display"
-                                    VerticalOptions="Start" >
+                    <Grid RowDefinitions="Auto, *"
+                          ColumnDefinitions="*">
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="model:Category">
-                                <Label Text="{Binding name}"
-                                       FontAttributes="Italic"
+                        <BoxView Grid.Row="0"
+                                 Margin="20,5,20,5"                   
+                                 HeightRequest="2"  
+                                 VerticalOptions="Fill"/>
+
+                        <CollectionView x:Name="workout_category_display"  
+                                        Grid.Row="1"
+                                        VerticalOptions="Start" >
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="model:Category">
+                                    <Label Text="{Binding name}"
                                        Padding="5"
-                                       MinimumWidthRequest="15"
+                                       FontSize="14"
                                        HorizontalOptions="Center" />
 
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
                 </Grid>
             </Grid>
 
