@@ -49,7 +49,7 @@
                           ColumnDefinitions="*">
 
                         <BoxView Grid.Row="0"
-                                 Margin="20,5,20,5"                   
+                                 Margin="20,0,20,0"                   
                                  HeightRequest="2"  
                                  VerticalOptions="Fill"/>
 
