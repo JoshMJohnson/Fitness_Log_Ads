@@ -19,7 +19,7 @@
         <Grid ColumnDefinitions="*, *" 
           RowDefinitions="Auto, Auto, Auto, *">
 
-            <Label Text="Create Category"
+            <Label Text="Create Routine"
                FontAttributes="Bold"
                Grid.Row="0"
                Grid.ColumnSpan="2"
@@ -51,7 +51,7 @@
                    MaxLength="25"
                    VerticalOptions="Center"
                    HorizontalTextAlignment="Center"
-                   Placeholder="Category Name" />
+                   Placeholder="Routine Name" />
             </Grid>
 
             <Grid Grid.Row="3"

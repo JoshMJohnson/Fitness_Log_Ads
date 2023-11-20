@@ -49,7 +49,7 @@
 
                 <Label Grid.Column="0"
                    VerticalOptions="Center"
-                   Text="Category:" />
+                   Text="Routine:" />
 
                 <Picker x:Name="exercise_category"
                     HorizontalTextAlignment="Center"
@@ -57,7 +57,7 @@
                     HorizontalOptions="Center" />
 
                 <Label x:Name="exercise_category_empty_display"
-                       Text="No Categories Found"
+                       Text="No Routines Found"
                        Margin="10"
                        FontAttributes="Italic"
                        FontSize="12"

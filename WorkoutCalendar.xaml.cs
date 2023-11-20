@@ -163,7 +163,7 @@ public partial class WorkoutCalendar : ContentPage
 
         vertical_layout_empty_category_list.Add(new Label
         {
-            Text = "No Categories Yet!",
+            Text = "No Routines Yet!",
             FontSize = 12,
             FontAttributes = FontAttributes.Italic,
             HorizontalOptions = LayoutOptions.Center

@@ -33,7 +33,7 @@
                            HorizontalOptions="Center"
                            FontSize="20" />
 
-                    <Label Text="Categories"
+                    <Label Text="Routines"
                            FontAttributes="Bold"
                            Grid.Row="1"
                            HorizontalOptions="Center"
@@ -76,7 +76,7 @@
                   RowDefinitions="*, *"
                   VerticalOptions="Center" >
 
-                <Button Text="Create Category"
+                <Button Text="Create Routine"
                         Grid.Row="0"
                         Margin="10"
                         CornerRadius="45"
@@ -85,7 +85,7 @@
                         HeightRequest="75"
                         Clicked="Create_Category" />
 
-                <Button Text="Delete Category"
+                <Button Text="Delete Routine"
                         Grid.Row="1"
                         Margin="10"
                         CornerRadius="100"

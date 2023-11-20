@@ -19,7 +19,7 @@
         <Grid ColumnDefinitions="*, *" 
           RowDefinitions="Auto, Auto, *">
 
-            <Label Text="Delete Category"
+            <Label Text="Delete Routine"
                FontAttributes="Bold"
                Grid.Row="0"
                Grid.ColumnSpan="2"
@@ -41,7 +41,7 @@
                     Grid.Column="2" />
 
                 <Label x:Name="exercise_category_empty_display"
-                       Text="No Categories Found"
+                       Text="No Routines Found"
                        MinimumWidthRequest="125"
                        Margin="10"
                        FontAttributes="Italic"
