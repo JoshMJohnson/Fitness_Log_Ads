@@ -16,17 +16,17 @@
     </Shell.FlyoutHeader>
 
     <ShellContent Title="Body Progression"
-                Icon="shell_icon_body_progression.png"
-                ContentTemplate="{DataTemplate local:BodyProgression}"
-                Route="BodyProgression" />
+                  Icon="{AppThemeBinding Light=shell_icon_body_progression.png, Dark=shell_icon_body_progression_dark.png}"
+                  ContentTemplate="{DataTemplate local:BodyProgression}"
+                  Route="BodyProgression" />
 
     <ShellContent Title="Body Weight"
-                  Icon="shell_icon_body_weight.png"
+                  Icon="{AppThemeBinding Light=shell_icon_body_weight.png, Dark=shell_icon_body_weight_dark.png}"
                   ContentTemplate="{DataTemplate local:BodyWeight}"        
                   Route="BodyWeight" />
 
     <FlyoutItem Title="Goals"
-                Icon="shell_icon_goals.png">
+                Icon="{AppThemeBinding Light=shell_icon_goals.png, Dark=shell_icon_goals_dark.png}">
 
         <Tab Title="Body Weight">
             <ShellContent ContentTemplate="{DataTemplate local:GoalsBodyWeight}"/>
@@ -37,17 +37,17 @@
     </FlyoutItem>
 
     <ShellContent Title="Personal Records"
-                  Icon="shell_icon_pr.png"
+                  Icon="{AppThemeBinding Light=shell_icon_pr.png, Dark=shell_icon_pr_dark.png}"
                   ContentTemplate="{DataTemplate local:PersonalRecords}"
                   Route="PersonalRecords" />
 
     <ShellContent Title="Workout Calendar"
-                  Icon="shell_icon_calendar.png"
+                  Icon="{AppThemeBinding Light=shell_icon_calendar.png, Dark=shell_icon_calendar_dark.png}"
                   ContentTemplate="{DataTemplate local:WorkoutCalendar}"
                   Route="WorkoutCalendar" />
 
     <ShellContent Title="Notes"
-                  Icon="shell_icon_notes.png"
+                  Icon="{AppThemeBinding Light=shell_icon_notes.png, Dark=shell_icon_notes_dark.png}"
                   ContentTemplate="{DataTemplate local:Notes}"
                   Route="Notes" />
 
