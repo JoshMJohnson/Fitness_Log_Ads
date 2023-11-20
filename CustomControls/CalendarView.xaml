@@ -135,6 +135,8 @@
         <Button Grid.Column="1"
                 WidthRequest="150"
                 CornerRadius="50"
+                HorizontalOptions="End"
+                Margin="20,0"
                 Clicked="Jump_To_Current_Date"
                 Text="Current Date" />
     </Grid>
