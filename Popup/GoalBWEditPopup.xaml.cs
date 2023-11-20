@@ -78,7 +78,7 @@ public partial class GoalBWEditPopup
             adCounter++;
             Preferences.Set("AdCounter", adCounter);
 
-            if (adCounter % 3 == 0)
+            if (adCounter % 6 == 0)
             {
                 Show_Intestitial();
             }
